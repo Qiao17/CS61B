@@ -137,7 +137,14 @@ public class Model extends Observable {
      *  Empty spaces are stored as null.
      */
     public static boolean emptySpaceExists(Board b) {
-        // TODO: Fill in this function.
+        int size = b.size();
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                if (b.tile(i, j) == null) {
+                    return true;
+                }
+            }
+        }
         return false;
     }
 
@@ -147,7 +154,18 @@ public class Model extends Observable {
      * given a Tile object t, we get its value with t.value().
      */
     public static boolean maxTileExists(Board b) {
-        // TODO: Fill in this function.
+        int size = b.size();
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                Tile tileTemp = b.tile(i, j);
+                if (tileTemp == null) {
+                    continue;
+                }
+                if (tileTemp.value() == MAX_PIECE) {
+                    return true;
+                }
+            }
+        }
         return false;
     }
 
@@ -158,7 +176,38 @@ public class Model extends Observable {
      * 2. There are two adjacent tiles with the same value.
      */
     public static boolean atLeastOneMoveExists(Board b) {
-        // TODO: Fill in this function.
+        int size = b.size();
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                Tile tileTemp = b.tile(i, j);
+                if (tileTemp == null) {
+                    return true;
+                }
+
+                // compare to right
+                if (i < (size - 1)) {
+                    Tile tileTempRight = b.tile(i + 1, j);
+                    if (tileTempRight == null) {
+                        return true;
+                    }
+                    if (tileTemp.value() == tileTempRight.value()) {
+                        return true;
+                    }
+                }
+
+                // compare to up
+                if (j < (size - 1)) {
+                    Tile tileTempUp = b.tile(i, j + 1);
+                    if (tileTempUp == null) {
+                        return true;
+                    }
+                    if (tileTemp.value() == tileTempUp.value()) {
+                       return true;
+                    }
+                }
+
+            }
+        }
         return false;
     }
 
