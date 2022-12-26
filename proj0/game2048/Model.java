@@ -116,7 +116,42 @@ public class Model extends Observable {
      *    and the trailing tile does not.
      */
     public void tilt(Side side) {
-        // TODO: Fill in this function.
+        _board.setViewingPerspective(side);
+
+        int size = _board.size();
+        for (int col = 0; col < size; col++) {
+            int nextRow = size - 1;
+            int lastValue = 0;
+            for (int row = size - 1; row >= 0; row--) {
+                // empty tile
+                Tile tileTemp = _board.tile(col, row);
+                if (tileTemp == null) {
+                    continue;
+                }
+
+                // two Tile have the same value -> merged into one Tile
+                // A tile that is the result of a merge will not merge again
+                // -> lastValue set to 0
+                int value = tileTemp.value();
+                if (value == lastValue) {
+                    nextRow += 1;
+                    lastValue = 0;
+                } else {
+                    lastValue = value;
+                }
+
+
+                if (row != nextRow) {
+                    boolean isMerge = _board.move(col, nextRow, tileTemp);
+                    if (isMerge) {
+                        _score += value * 2;
+                    }
+                }
+                nextRow -= 1;
+            }
+        }
+
+        _board.setViewingPerspective(Side.NORTH);
 
         checkGameOver();
     }
