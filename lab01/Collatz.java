@@ -2,14 +2,15 @@
  *  @author YOUR NAME HERE
  */
 public class Collatz {
-    /** Buggy implementation of nextNumber! */
+
+    /** Returns the nextNumber in a Collatz sequence. */
+    /** */
     public static int nextNumber(int n) {
-        if (n  == 128) {
-            return 1;
-        } else if (n == 5) {
-            return 3 * n + 1;
-        } else {
-            return n * 2;
+        // TODO: Fill in this method.
+        if (n % 2 == 0){
+            return n/2;
+        }else{
+            return 3*n + 1;
         }
     }
 
