@@ -171,7 +171,7 @@ public class ArrayDequeTest {
         lld3.addFirst("a");
         lld3.addLast("b");
         lld3.addFirst("c");
-        ArrayDeque<String> lld4 = new ArrayDeque<>();
+        LinkedListDeque<String> lld4 = new LinkedListDeque<>();
         lld4.addFirst("a");
         lld4.addLast("b");
         lld4.addFirst("c");

@@ -2,7 +2,7 @@ package deque;
 
 import java.util.Iterator;
 
-public class ArrayDeque<T> implements Iterable<T>{
+public class ArrayDeque<T> implements Iterable<T>, Deque<T>{
     private T[] items;
     private int size;
     private int nextFirst;
@@ -29,6 +29,7 @@ public class ArrayDeque<T> implements Iterable<T>{
         nextLast = size;
     }
 
+    @Override
     public void addFirst(T item) {
         if (size == items.length) {
             resize(size * 2);
@@ -41,6 +42,7 @@ public class ArrayDeque<T> implements Iterable<T>{
     }
 
     /** Inserts X into the back of the list. */
+    @Override
     public void addLast(T item) {
         if (size == items.length) {
             resize(size * 2);
@@ -51,21 +53,20 @@ public class ArrayDeque<T> implements Iterable<T>{
         size = size + 1;
     }
 
-    public boolean isEmpty() {
-        return size == 0;
-    }
-
     /** Gets the ith item in the list (0 is the front). */
+    @Override
     public T get(int index) {
         return items[(nextFirst + 1 + index) % items.length];
     }
 
     /** Returns the number of items in the list. */
+    @Override
     public int size() {
         return size;
     }
 
     // Removes and returns the item at the front of the deque. If no such item exists, returns null.
+    @Override
     public T removeFirst() {
         if (size == 0) {
             return null;
@@ -86,6 +87,7 @@ public class ArrayDeque<T> implements Iterable<T>{
 
     /** Deletes item from back of the list and
      * returns deleted item. */
+    @Override
     public T removeLast() {
         if (size == 0) {
             return null;
@@ -110,6 +112,7 @@ public class ArrayDeque<T> implements Iterable<T>{
 
     }
 */
+    @Override
     public void printDeque() {
         int length = items.length;
         int first = (nextFirst + 1) % length;
@@ -150,16 +153,16 @@ public class ArrayDeque<T> implements Iterable<T>{
         if (this == o) {
             return true;
         }
-        if (o instanceof ArrayDeque oAD) {
-            if (size != oAD.size) {
+        if (o instanceof Deque oAD) {
+            if (size != oAD.size()) {
                 return false;
             }
-            int index = (oAD.nextFirst + 1) % oAD.items.length;
+            int i = 0;
             for (T x: this) {
-                if (!x.equals(oAD.items[index])) {
+                if (!x.equals(get(i))){
                     return false;
                 }
-                index = (index + 1) % oAD.items.length;
+                i++;
             }
             return true;
         }
