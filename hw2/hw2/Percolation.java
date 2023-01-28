@@ -8,6 +8,7 @@ public class Percolation {
     public WeightedQuickUnionUF site;
     public int N;
     public int[] openSta;
+    public int openCount;
     /** create N-by-N grid, with all sites initially blocked
      * */
     public Percolation(int Num) {
@@ -26,6 +27,7 @@ public class Percolation {
     public void open(int row, int col) {
         int curr = xyTo1D(row, col);
         openSta[curr] = 1;
+        openCount += 1;
 
         // virtual top site
         if (curr < N) {
@@ -33,9 +35,9 @@ public class Percolation {
         }
 
         // virtual down site
-        if (curr >= N * (N - 1) && isFull(row, col)) {
-            site.union(curr, N * N + 1);
-        }
+        //if (curr >= N * (N - 1) && isFull(row, col)) {
+         //   site.union(curr, N * N + 1);
+       // }
 
         // up
         if (row > 0) {
@@ -85,18 +87,16 @@ public class Percolation {
             return false;
         }
         int curr = xyTo1D(row, col);
-        return site.connected(curr, N * N);
+        boolean isFull = site.connected(curr, N * N);
+        if (row == N - 1 && isFull) {
+            site.union(curr, N * N + 1);
+        }
+        return isFull;
     }
 
     // number of open sites
     public int numberOfOpenSites() {
-        int sum = 0;
-        for (int x: openSta) {
-            if (x == 1) {
-                sum += 1;
-            }
-        }
-        return sum;
+        return openCount;
     }
 
     // does the system percolate?
