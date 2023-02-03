@@ -57,6 +57,7 @@ public class TestBSTMap {
         assertTrue(((Integer) b.get("KISS")).equals(5));
         assertNotEquals(null,b.get("starChild"));
         assertEquals(2, b.size());
+        b.printInOrder();
     }
 
     // assumes put works
@@ -95,6 +96,7 @@ public class TestBSTMap {
         b.put("c", "swiss");
         b.put("b", "pepper jack");
         b.put("e", "gouda");
+        b.printInOrder();
         assertEquals(b.size(), 5);
         assertEquals(b.get("d"), "parmesan");
         assertEquals(b.get("a"), "mozzarella");
@@ -102,6 +104,7 @@ public class TestBSTMap {
         assertEquals(b.get("b"), "pepper jack");
         assertEquals(b.get("e"), "gouda");
         b.put("b", "provolone");
+        b.printInOrder();
         assertEquals(b.size(), 5);
         assertEquals(b.get("b"), "provolone");
     }
