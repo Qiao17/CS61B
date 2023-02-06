@@ -16,7 +16,11 @@ public class Main {
         */
 
         hns.startUp();
-        hns.register("history", new DummyHistoryHandler());
-        hns.register("historytext", new DummyHistoryTextHandler());
+        //hns.register("history", new DummyHistoryHandler());
+        hns.register("history", new HistoryHandler(new NGramMap("./data/ngrams/top_14377_words.csv",
+                "./data/ngrams/total_counts.csv")));
+        //hns.register("historytext", new DummyHistoryTextHandler());
+        hns.register("historytext", new HistoryTextHandler(new NGramMap("./data/ngrams/top_14377_words.csv",
+                "./data/ngrams/total_counts.csv")));
     }
 }

@@ -47,9 +47,9 @@ public class TestNGramMap {
                 "./data/ngrams/total_counts.csv");
 
         // returns the count of the number of occurrences of fish per year between 1850 and 1933.
-        TimeSeries fishCount = ngm.countHistory("fish", 1850, 1933);
-        assertEquals(136497.0, fishCount.get(1865), 1E-10);
-        assertEquals(444924.0, fishCount.get(1922), 1E-10);
+        TimeSeries fishCount = ngm.countHistory("cube", 1850, 1933);
+        assertEquals(6390.0, fishCount.get(1865), 1E-10);
+        assertEquals(27283.0, fishCount.get(1922), 1E-10);
 
         TimeSeries totalCounts = ngm.totalCountHistory();
         assertEquals(2563919231.0, totalCounts.get(1865), 1E-10);

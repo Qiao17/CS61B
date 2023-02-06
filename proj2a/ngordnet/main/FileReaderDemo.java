@@ -7,7 +7,10 @@ import edu.princeton.cs.algs4.In;
  */
 public class FileReaderDemo {
     public static void main(String[] args) {
-        In in = new In("ngordnet/main/example_input_file.txt");
+         In in = new In("ngordnet/main/example_input_file.txt");
+
+       // String file = "./data/ngrams/total_counts.csv";
+        //In in = new In(file);
 
         /* Every time you call a read method from the In class,
          * it reads the next token from the file, assuming it is
@@ -23,8 +26,12 @@ public class FileReaderDemo {
         String fourthItemInFile = in.readString();
         double fifthItemInFile = in.readDouble();
 
+
         System.out.println("The file contained "  + firstItemInFile + ", " +
                 secondItemInFile + ", " + thirdItemInFile + ", " +
                 fourthItemInFile + ", and " + fifthItemInFile);
+        String s = in.readString();
+        System.out.println(s);
+
     }
 }
